@@ -257,6 +257,9 @@ fun hasDifferentDigits(n: Int): Boolean {
 
 fun unbloatX(x: Double) : Double {
     var shortX = x
+    while (shortX < 0) {
+        shortX = shortX + 2 * PI
+    }
     while (shortX >= 2 * PI) {
         shortX = shortX - 2 * PI
     }
