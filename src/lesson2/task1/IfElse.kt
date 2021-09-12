@@ -68,7 +68,7 @@ fun minBiRoot(a: Double, b: Double, c: Double): Double {
  * вернуть строку вида: «21 год», «32 года», «12 лет».
  */
 fun ageDescription(age: Int): String {
-    if ((age % 10 == 0) || ((age >= 5) && (age < 20))) {
+    if ((age % 10 == 0) || ((age % 10 >= 5) && (age % 10 <= 9)) || ((age % 100 >= 11) && (age % 100 <= 14))) {
         return ("$age лет");
     } else if (age % 10 == 1) {
         return("$age год");
@@ -190,9 +190,12 @@ fun timeForHalfWay(
      */
     fun triangleKind(a: Double, b: Double, c: Double): Int
     {
-        if (((a*a)+(b*b))<(c*c)) return 2;
-        else if (((a*a)+(b*b))>(c*c)) return 0;
-        else if (((a*a)+(b*b))==(c*c)) return 1;
+        if((a+b>c)&&(a+c>b)&&(b+c>a))
+        {
+            if (((a * a) + (b * b)) < (c * c)) return 2;
+            else if (((a * a) + (b * b)) > (c * c)) return 0;
+            else return 1;
+        }
         else return -1;
     }
 
@@ -207,6 +210,7 @@ fun timeForHalfWay(
    fun segmentLength(a: Int, b: Int, c: Int, d: Int): Int
    {
        if ((b<c)||(d<a)) return -1;
+       else if ((b==a)|| (c==d)) return 0;
        else {
            if(min(a,c)==a){
                return b-c;
