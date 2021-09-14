@@ -191,17 +191,17 @@ fun timeForHalfWay(
         {
             if ((a>=b)&&(a>=c))
             {
-                angle = acos(((b*b)+(c*c)-(a*a))/(2*b*c));
+                angle = acos(((b*b)+(c*c)-(a*a))/(2.0*b*c));
             }
             else if ((b>=a)&&(b>=c))
             {
-                 angle = acos(((a*a)+(c*c)-(b*b))/(2*a*c));
+                 angle = acos(((a*a)+(c*c)-(b*b))/(2.0*a*c));
             }
             else
             {
-              angle = acos(((b*b)+(a*a)-(c*c))/(2*b*a));
+              angle = acos(((b*b)+(a*a)-(c*c))/(2.0*b*a));
             }
-            if (angle<90) return 0;
+            if (angle<90.0) return 0;
             else if (angle == 90.0) return 1;
             else return 2;
         }
@@ -220,8 +220,8 @@ fun timeForHalfWay(
    {
        if ((b<c)||(d<a)) return -1;
        else if ((b==a)|| (c==d)) return 0;
-       else if ((a>c) && (b<d)) return b-a;
-       else if ((c>a)&& (d<b)) return d-c;
+       else if ((a>=c) && (b<=d)) return b-a;
+       else if ((c>=a)&& (d<=b)) return d-c;
        else {
            if(min(a,c)==a)
            {
