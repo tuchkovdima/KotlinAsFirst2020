@@ -186,7 +186,7 @@ fun timeForHalfWay(
      */
     fun triangleKind(a: Double, b: Double, c: Double): Int
     {
-        var angle: Double = 0.0;
+        var angle: Double = 100.0;
         if((a+b>c)&&(a+c>b)&&(b+c>a))
         {
 
