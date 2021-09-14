@@ -186,7 +186,7 @@ fun timeForHalfWay(
      */
     fun triangleKind(a: Double, b: Double, c: Double): Int
     {
-        var angle = Double.NaN
+        var angle: Double = 0.0;
         if((a+b>c)&&(a+c>b)&&(b+c>a))
         {
 
@@ -194,16 +194,17 @@ fun timeForHalfWay(
             {
                 angle = acos(((b*b)+(c*c)-(a*a))/(2.0*b*c));
             }
-            else if ((b>=a)&&(b>=c))
+            else if ((b >= a) && (b>=c))
             {
                 angle  = acos(((a*a)+(c*c)-(b*b))/(2.0*a*c));
             }
-            else
+            else if ((c >= a) && (c>=b))
             {
                angle= acos(((b*b)+(a*a)-(c*c))/(2.0*b*a));
             }
-            if (angle < 90.0) return 0;
-            else if (angle == 90.0) return 1;
+
+            if (angle == 90.0) return 1;
+            else if (angle < 90.0) return 0;
             else return 2;
         }
         else return -1;
