@@ -86,27 +86,23 @@ fun timeForHalfWay(
     t2: Double, v2: Double,
     t3: Double, v3: Double
 ): Double {
-    val time: Array<Double> = arrayOf(t1, t2, t3);
-    val speed: Array<Double> = arrayOf(v1, v2, v3);
+    val speedtime: Array<Double> = arrayOf(t1, t2, t3, v1, v2, v3);
     var Shalf:Double =(t1*v1+t2*v2+t3*v3)/2;
     var Thalf:Double = 0.0;
 
-    for (t in time)
+    for (i in 0..2)
     {
-        for (v in speed )
-        {
-            if ((Shalf/v)>t)
+        if ((Shalf/speedtime[i])>speedtime[i+3])
             {
-                Shalf = Shalf - (v*t);
-                Thalf = Thalf + t;
+                Shalf = Shalf - (speedtime[i]*speedtime[i+3]);
+                Thalf = Thalf + speedtime[i+3];
             }
             else
             {
-                Thalf=Thalf+(Shalf/v);
+                Thalf=Thalf+(Shalf/speedtime[i]);
                 break
             }
         }
-    }
     return Thalf
 }
 
@@ -190,11 +186,24 @@ fun timeForHalfWay(
      */
     fun triangleKind(a: Double, b: Double, c: Double): Int
     {
+        var angle:Double = 0.0;
         if((a+b>c)&&(a+c>b)&&(b+c>a))
         {
-            if (((a * a) + (b * b)) < (c * c)) return 2;
-            else if (((a * a) + (b * b)) > (c * c)) return 0;
-            else return 1;
+            if ((a>=b)&&(a>=c))
+            {
+                angle = acos(((b*b)+(c*c)-(a*a))/(2*b*c));
+            }
+            else if ((b>=a)&&(b>=c))
+            {
+                 angle = acos(((a*a)+(c*c)-(b*b))/(2*a*c));
+            }
+            else
+            {
+              angle = acos(((b*b)+(a*a)-(c*c))/(2*b*a));
+            }
+            if (angle<90) return 0;
+            else if (angle == 90.0) return 1;
+            else return 2;
         }
         else return -1;
     }
@@ -211,8 +220,11 @@ fun timeForHalfWay(
    {
        if ((b<c)||(d<a)) return -1;
        else if ((b==a)|| (c==d)) return 0;
+       else if ((a>c) && (b<d)) return b-a;
+       else if ((c>a)&& (d<b)) return d-c;
        else {
-           if(min(a,c)==a){
+           if(min(a,c)==a)
+           {
                return b-c;
            } else return d-a;
 
