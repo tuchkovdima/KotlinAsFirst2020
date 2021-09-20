@@ -384,7 +384,7 @@ fun squareSequenceDigit(n: Int): Int
     var i2 = 0;
     var count = 0;
     var number = 0;
-    var retin = 0;
+    var retin = 1;
 
     while (i2 <= n)
     {
