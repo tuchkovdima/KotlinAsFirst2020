@@ -3,7 +3,8 @@
 package lesson3.task1
 
 import java.lang.Math.pow
-import kotlin.math.sqrt
+import kotlin.math.*
+
 
 // Урок 3: циклы
 // Максимальное количество баллов = 9
@@ -80,7 +81,7 @@ fun digitNumber(n: Int): Int
     do {
         count++;
         number /= 10;
-    } while (number > 0);
+    } while (number != 0);
     return count;
 }
 
@@ -201,7 +202,7 @@ fun lcm(m: Int, n: Int): Int
 {
     var k = 2;
     var min = minOf(n, m);
-
+    if (m == 1 || n == 1) return 1;
     while (k <= min)
     {
         if (m % k == 0 && n % k == 0) break;
@@ -255,7 +256,7 @@ fun revert(n: Int): Int
     do {
         count++;
         number /= 10;
-    } while (number > 0);
+    } while (number != 0);
 
     var i = 0;
     number = n;
@@ -287,7 +288,7 @@ fun isPalindrome(n: Int): Boolean
     do {
         count++;
         number /= 10;
-    } while (number > 0);
+    } while (number != 0);
 
     var i = 1;
     var palindrome = true;
@@ -322,7 +323,7 @@ fun hasDifferentDigits(n: Int): Boolean
     do {
         count++;
         number /= 10;
-    } while (number > 0);
+    } while (number != 0);
 
     var i = 2;
     var first = n % 10;
@@ -393,7 +394,7 @@ fun squareSequenceDigit(n: Int): Int
         do {
             count++;
             number /= 10;
-        } while (number > 0);
+        } while (number != 0);
 
         i2 += count;
         if (i2 == n)
@@ -442,7 +443,7 @@ fun fibSequenceDigit(n: Int): Int
         do {
             count++;
             third /= 10;
-        } while (third > 0);
+        } while (third != 0);
         i += count;
         if (i == n)
         {
