@@ -69,11 +69,11 @@ fun minBiRoot(a: Double, b: Double, c: Double): Double {
  */
 fun ageDescription(age: Int): String {
     if ((age % 10 == 0) || ((age % 10 >= 5) && (age % 10 <= 9)) || ((age % 100 >= 11) && (age % 100 <= 14))) {
-        return ("$age лет");
+        return ("$age лет")
     } else if (age % 10 == 1) {
-        return ("$age год");
+        return ("$age год")
     } else {
-        return ("$age года");
+        return ("$age года")
     }
 }
 
@@ -89,16 +89,16 @@ fun timeForHalfWay(
     t2: Double, v2: Double,
     t3: Double, v3: Double
 ): Double {
-    val speedtime: Array<Double> = arrayOf(v1, v2, v3, t1, t2, t3);
-    var Shalf: Double = (t1 * v1 + t2 * v2 + t3 * v3) / 2;
-    var Thalf: Double = 0.0;
+    val speedtime: Array<Double> = arrayOf(v1, v2, v3, t1, t2, t3)
+    var Shalf = (t1 * v1 + t2 * v2 + t3 * v3) / 2
+    var Thalf = 0.0
 
     for (i in 0..2) {
         if ((Shalf / speedtime[i]) > speedtime[i + 3]) {
-            Shalf = Shalf - (speedtime[i] * speedtime[i + 3]);
-            Thalf = Thalf + speedtime[i + 3];
+            Shalf = Shalf - (speedtime[i] * speedtime[i + 3])
+            Thalf = Thalf + speedtime[i + 3]
         } else {
-            Thalf = Thalf + (Shalf / speedtime[i]);
+            Thalf = Thalf + (Shalf / speedtime[i])
             break
         }
     }
@@ -121,14 +121,14 @@ fun whichRookThreatens(
 ): Int {
     if ((kingX == rookX1) || (rookY1 == kingY)) {
         if ((kingX == rookX2) || (rookY2 == kingY)) {
-            return 3;
+            return 3
         } else {
-            return 1;
+            return 1
         }
     } else if ((kingX == rookX2) || (rookY2 == kingY)) {
-        return 2;
+        return 2
     } else {
-        return 0;
+        return 0
     }
 }
 
@@ -150,14 +150,14 @@ fun rookOrBishopThreatens(
 ): Int {
     if ((kingX == rookX) || (rookY == kingY)) {
         if (abs(kingX - bishopX) == abs(kingY - bishopY)) {
-            return 3;
+            return 3
         } else {
-            return 1;
+            return 1
         }
     } else if (abs(kingX - bishopX) == abs(kingY - bishopY)) {
-        return 2;
+        return 2
     } else {
-        return 0;
+        return 0
     }
 }
 
@@ -171,21 +171,21 @@ fun rookOrBishopThreatens(
  * Если такой треугольник не существует, вернуть -1.
  */
 fun triangleKind(a: Double, b: Double, c: Double): Int {
-    var cosangle: Double = 0.0;
+    var cosangle: Double = 0.0
 
     if ((a + b > c) && (a + c > b) && (b + c > a)) {
 
         if ((a >= b) && (a >= c)) {
-            cosangle = ((b * b) + (c * c) - (a * a)) / (2.0 * b * c);
+            cosangle = ((b * b) + (c * c) - (a * a)) / (2.0 * b * c)
         } else if ((b >= a) && (b >= c)) {
-            cosangle = ((a * a) + (c * c) - (b * b)) / (2.0 * a * c);
+            cosangle = ((a * a) + (c * c) - (b * b)) / (2.0 * a * c)
         } else if ((c >= a) && (c >= b)) {
-            cosangle = ((b * b) + (a * a) - (c * c)) / (2.0 * b * a);
+            cosangle = ((b * b) + (a * a) - (c * c)) / (2.0 * b * a)
         }
-        if (cosangle == 0.0) return 1;
-        else if (cosangle > 0.0) return 0;
-        else return 2;
-    } else return -1;
+        if (cosangle == 0.0) return 1
+        else if (cosangle > 0.0) return 0
+        else return 2
+    } else return -1
 }
 
 /**
@@ -197,14 +197,14 @@ fun triangleKind(a: Double, b: Double, c: Double): Int {
  * Если пересечения нет, вернуть -1.
  */
 fun segmentLength(a: Int, b: Int, c: Int, d: Int): Int {
-    if ((b < c) || (d < a)) return -1;
-    else if ((b == a) || (c == d)) return 0;
-    else if ((a >= c) && (b <= d)) return b - a;
-    else if ((c >= a) && (d <= b)) return d - c;
+    if ((b < c) || (d < a)) return -1
+    else if ((b == a) || (c == d)) return 0
+    else if ((a >= c) && (b <= d)) return b - a
+    else if ((c >= a) && (d <= b)) return d - c
     else {
         if (min(a, c) == a) {
-            return b - c;
-        } else return d - a;
+            return b - c
+        } else return d - a
 
     }
 }
