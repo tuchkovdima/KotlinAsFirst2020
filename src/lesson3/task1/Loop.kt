@@ -74,15 +74,14 @@ fun digitCountInNumber(n: Int, m: Int): Int =
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun digitNumber(n: Int): Int
-{
-    var count = 0;
-    var number = n;
+fun digitNumber(n: Int): Int {
+    var count = 0
+    var number = n
     do {
-        count++;
-        number /= 10;
-    } while (number != 0);
-    return count;
+        count++
+        number /= 10
+    } while (number != 0)
+    return count
 }
 
 
@@ -96,22 +95,20 @@ fun digitNumber(n: Int): Int
 
 fun fib(n: Int): Int {
 
-   if (n == 1 || n == 2)
-   {
-       return 1;
-   }
-    var first = 1;
-    var second = 1;
-    var i = 2;
-    var third = 0;
-    while(i < n)
-    {
-        i++;
-        third = first + second;
-        first = second;
-        second = third;
+    if (n == 1 || n == 2) {
+        return 1
     }
-    return second;
+    var first = 1
+    var second = 1
+    var i = 2
+    var third = 0
+    while (i < n) {
+        i++
+        third = first + second
+        first = second
+        second = third
+    }
+    return second
 }
 
 /**
@@ -119,18 +116,15 @@ fun fib(n: Int): Int {
  *
  * Для заданного числа n > 1 найти минимальный делитель, превышающий 1
  */
-fun minDivisor(n: Int): Int
-{
-    var i = 2;
-    while (i <= n)
-    {
-        if (n % i == 0)
-        {
-            break;
+fun minDivisor(n: Int): Int {
+    var i = 2
+    while (i <= n) {
+        if (n % i == 0) {
+            break
         }
-        i++;
+        i++
     }
-    return i;
+    return i
 }
 
 /**
@@ -138,18 +132,15 @@ fun minDivisor(n: Int): Int
  *
  * Для заданного числа n > 1 найти максимальный делитель, меньший n
  */
-fun maxDivisor(n: Int): Int
-{
-    var i = n - 1;
-    while (i >= 1)
-    {
-        if (n % i == 0)
-        {
-            break;
+fun maxDivisor(n: Int): Int {
+    var i = n - 1
+    while (i >= 1) {
+        if (n % i == 0) {
+            break
         }
-        i--;
+        i--
     }
-    return i;
+    return i
 }
 
 /**
@@ -168,27 +159,22 @@ fun maxDivisor(n: Int): Int
  * Написать функцию, которая находит, сколько шагов требуется для
  * этого для какого-либо начального X > 0.
  */
-fun collatzSteps(x: Int): Int
-{
-    if (x == 1) return 0;
+fun collatzSteps(x: Int): Int {
+    if (x == 1) return 0
 
-    var i = 1;
-    var x1 = x;
-    var x2 = 0;
+    var i = 1
+    var x1 = x
+    var x2 = 0
 
-    while (x2 != 1)
-    {
-        if(x1 % 2 == 0)
-        {
-            x2 = x1/2
+    while (x2 != 1) {
+        if (x1 % 2 == 0) {
+            x2 = x1 / 2
+        } else {
+            x2 = 3 * x1 + 1
         }
-        else
-        {
-            x2 = 3 * x1 + 1;
-        }
-        i++;
+        i++
     }
-    return i;
+    return i
 }
 
 
@@ -198,18 +184,18 @@ fun collatzSteps(x: Int): Int
  * Для заданных чисел m и n найти наименьшее общее кратное, то есть,
  * минимальное число k, которое делится и на m и на n без остатка
  */
-fun lcm(m: Int, n: Int): Int
-{
-    var k = 2;
-    var min = minOf(n, m);
-    if (m == 1 || n == 1) return 1;
-    while (k <= min)
-    {
-        if (m % k == 0 && n % k == 0) break;
-        k++;
+
+
+fun lcm(m: Int, n: Int): Int {
+
+    var k = 1
+    while (k <= (m * n)) {
+        if (k % m == 0 && k % n == 0) break
+        k++
     }
-    return k;
+    return k
 }
+
 
 /**
  * Средняя (3 балла)
@@ -218,19 +204,17 @@ fun lcm(m: Int, n: Int): Int
  * Взаимно простые числа не имеют общих делителей, кроме 1.
  * Например, 25 и 49 взаимно простые, а 6 и 8 -- нет.
  */
-fun isCoPrime(m: Int, n: Int): Boolean
-{
-    var k: Boolean = true;
-    var i = 2;
+fun isCoPrime(m: Int, n: Int): Boolean {
 
-    var min = minOf(n, m);
+    var i = 2
 
-    while (i <= min)
-    {
-        if (m % i == 0 && n % i == 0) k = false;
-        i++;
+    val min = minOf(n, m)
+
+    while (i <= min) {
+        if (m % i == 0 && n % i == 0) return false
+        i++
     }
-    return k;
+    return true
 }
 
 /**
@@ -249,27 +233,20 @@ fun squareBetweenExists(m: Int, n: Int): Boolean = TODO()
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun revert(n: Int): Int
-{
-    var count = 0;
-    var number = n;
-    do {
-        count++;
-        number /= 10;
-    } while (number != 0);
+fun revert(n: Int): Int {
 
-    var i = 0;
-    number = n;
+    val count = digitNumber(n)
+    var i = 0
+    var number = n
 
-    var new_number:Int = 0;
-    while (i < count)
-    {
-        new_number += (number % 10) * (pow(10.0, (count - i - 1).toDouble())).toInt();
-        number /= 10;
+    var new_number = 0
+    while (i < count) {
+        new_number += (number % 10) * 10.0.pow((count - i - 1).toDouble()).toInt()
+        number /= 10
+        i++
     }
-    return new_number;
+    return new_number
 }
-
 
 
 /**
@@ -281,31 +258,29 @@ fun revert(n: Int): Int
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun isPalindrome(n: Int): Boolean
-{
-    var count = 0;
-    var number = n;
+fun isPalindrome(n: Int): Boolean {
+    var count = 0
+    var number = n
     do {
-        count++;
-        number /= 10;
-    } while (number != 0);
+        count++
+        number /= 10
+    } while (number != 0)
 
-    var i = 1;
-    var palindrome = true;
-    number = n;
-    while (i < count)
-    {
-        if((number%10)!=(((number) - (number % (pow(10.0, (count - i).toDouble())).toInt())) /
-                    (pow(10.0, (count - i).toDouble())).toInt()))
-        {
-            palindrome=false;
-            break;
+    var i = 1
+    var palindrome = true
+    number = n
+    while (i < count) {
+        if ((number % 10) != (((number) - (number % (pow(10.0, (count - i).toDouble())).toInt())) /
+                    (pow(10.0, (count - i).toDouble())).toInt())
+        ) {
+            palindrome = false
+            break
         }
-        number /= 10;
+        number /= 10
         number %= (pow(10.0, (count - i - 1).toDouble())).toInt()
-        i += 2;
+        i += 2
     }
-    return palindrome;
+    return palindrome
 }
 
 /**
@@ -316,35 +291,31 @@ fun isPalindrome(n: Int): Boolean
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun hasDifferentDigits(n: Int): Boolean
-{
-    var count = 0;
-    var number = n;
+fun hasDifferentDigits(n: Int): Boolean {
+    var count = 0
+    var number = n
     do {
-        count++;
-        number /= 10;
-    } while (number != 0);
+        count++
+        number /= 10
+    } while (number != 0)
 
-    var i = 2;
-    var first = n % 10;
-    var second = 0;
-    var different = false;
+    var i = 2
+    var first = n % 10
+    var second = 0
 
-    number = n / 10;
-    while (i <= count)
-    {
-        second = number % 10;
 
-        if (first != second)
-        {
-            different = true;
-            break;
+    number = n / 10
+    while (i <= count) {
+        second = number % 10
+
+        if (first != second) {
+            return true
         }
-        i++;
-        number /= 10;
-        first = second;
+        i++
+        number /= 10
+        first = second
     }
-    return different;
+    return false
 }
 
 /**
@@ -378,38 +349,24 @@ fun cos(x: Double, eps: Double): Double = TODO()
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun squareSequenceDigit(n: Int): Int
-{
-    var i1 = 1;
-    var i2 = 0;
-    var count = 0;
-    var number = 0;
-    var retin = 1;
+fun squareSequenceDigit(n: Int): Int {
 
-    while (i2 <= n)
-    {
-        count = 0;
-        number = i1 * i1;
 
-        do {
-            count++;
-            number /= 10;
-        } while (number != 0);
+    var number = n
+    var i = 1
 
-        i2 += count;
-        if (i2 == n)
-        {
-            retin = (i1 * i1) % 10;
+    while (i <= n) {
+
+        val count = digitNumber(i * i)
+        if (number - count <= 0) {
+            val position = count - number + 1
+            return (i * i) % 10.0.pow(position.toDouble()).toInt() / 10.0.pow((position - 1).toDouble()).toInt()
+        } else {
+            number -= count
         }
-        else if (i2 > n)
-        {
-            count = i2 - n;
-            retin = (((i1 * i1) - (i1 * i1 % (pow(10.0, count.toDouble())).toInt())) /
-                    (pow(10.0, count.toDouble())).toInt()) % 10;
-        }
-        i1 ++;
+        i++
     }
-    return retin;
+    return -1
 }
 
 /**
@@ -421,41 +378,22 @@ fun squareSequenceDigit(n: Int): Int
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun fibSequenceDigit(n: Int): Int
-{
-    if (n == 1 || n == 2)
-    {
-        return 1;
-    }
-    var first = 1;
-    var second = 1;
-    var third = 0;
-    var i = 2;
-    var count = 0;
-    var number = 0;
-    var retin = 0;
-    while (i <= n)
-    {
-        third = first + second;
-        first = second;
-        second = third;
-        count = 0;
-        do {
-            count++;
-            third /= 10;
-        } while (third != 0);
-        i += count;
-        if (i == n)
-        {
-            retin = second % 10;
-        }
-        else if (i > n)
-        {
-            count = i - n;
-            retin = ((second - (second % (pow(10.0, count.toDouble())).toInt())) /
-                    (pow(10.0, count.toDouble())).toInt()) % 10;
-        }
-    }
-    return retin;
+fun fibSequenceDigit(n: Int): Int {
 
+    var number = n
+    var i = 1
+    while (i <= n) {
+
+        val fibNumber = fib(i)
+        val count = digitNumber(fibNumber)
+        if (number - count <= 0) {
+            val position = count - number + 1
+            return fibNumber % 10.0.pow(position.toDouble()).toInt() / 10.0.pow((position - 1).toDouble()).toInt()
+        } else {
+            number -= count
+        }
+        i++
+    }
+    return -1
 }
+
