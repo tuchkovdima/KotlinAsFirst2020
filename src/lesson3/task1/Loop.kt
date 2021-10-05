@@ -159,23 +159,7 @@ fun maxDivisor(n: Int): Int {
  * Написать функцию, которая находит, сколько шагов требуется для
  * этого для какого-либо начального X > 0.
  */
-fun collatzSteps(x: Int): Int {
-    if (x == 1) return 0
-
-    var i = 1
-    var x1 = x
-    var x2 = 0
-
-    while (x2 != 1) {
-        if (x1 % 2 == 0) {
-            x2 = x1 / 2
-        } else {
-            x2 = 3 * x1 + 1
-        }
-        i++
-    }
-    return i
-}
+fun collatzSteps(x: Int): Int = TODO()
 
 
 /**
@@ -186,15 +170,7 @@ fun collatzSteps(x: Int): Int {
  */
 
 
-fun lcm(m: Int, n: Int): Int {
-
-    var k = 1
-    while (k <= (m * n)) {
-        if (k % m == 0 && k % n == 0) break
-        k++
-    }
-    return k
-}
+fun lcm(m: Int, n: Int): Int = TODO()
 
 
 /**
@@ -258,26 +234,31 @@ fun revert(n: Int): Int {
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
+
+fun tenpolinome(many: Int): Int {
+
+
+    var ten = 10
+    for (i in 2..many){
+        ten *=10
+    }
+    return ten
+}
+
 fun isPalindrome(n: Int): Boolean {
-    var count = 0
     var number = n
-    do {
-        count++
-        number /= 10
-    } while (number != 0)
+    val count = digitNumber(number)
 
     var i = 1
     var palindrome = true
     number = n
     while (i < count) {
-        if ((number % 10) != (((number) - (number % (pow(10.0, (count - i).toDouble())).toInt())) /
-                    (pow(10.0, (count - i).toDouble())).toInt())
-        ) {
+        if ((number % 10) != ((number - (number % tenpolinome(count - i))) / tenpolinome(count - i))) {
             palindrome = false
             break
         }
         number /= 10
-        number %= (pow(10.0, (count - i - 1).toDouble())).toInt()
+        number %= tenpolinome(count - i - 1)
         i += 2
     }
     return palindrome
