@@ -89,7 +89,7 @@ fun timeForHalfWay(
     t2: Double, v2: Double,
     t3: Double, v3: Double
 ): Double {
-    val speedtime: Array<Double> = arrayOf(v1, v2, v3, t1, t2, t3)
+    val speedtime: DoubleArray = doubleArrayOf(v1, v2, v3, t1, t2, t3)
     var Shalf = (t1 * v1 + t2 * v2 + t3 * v3) / 2
     var Thalf = 0.0
 
