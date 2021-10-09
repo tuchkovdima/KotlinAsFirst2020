@@ -250,4 +250,42 @@ fun roman(n: Int): String = TODO()
  * Например, 375 = "триста семьдесят пять",
  * 23964 = "двадцать три тысячи девятьсот шестьдесят четыре"
  */
-fun russian(n: Int): String = TODO()
+fun russian(n: Int): String {
+    val result = mutableListOf<String>()
+    var position = 0
+    var number = n
+    val rus = listOf(
+        listOf("один", "два", "три", "четыре", "пять", "шесть", "семь", "восемь", "девять"),
+        listOf("десять", "двадцать", "тридцать", "сорок", "пятьдесят", "шестьдесят", "семьдесят", "восемьдесят",
+            "девяносто"),
+        listOf("сто", "двести", "триста", "четыреста", "пятьсот", "шестьсот", "семьсот", "восемьсот", "девятьсот"),
+        listOf("одна", "две", "одиннадцать", "двенадцать", "тринадцать", "четырнадцать", "пятнадцать", "шестнадцать",
+            "семнадцать", "восемнадцать", "девятнадцать")
+    )
+    while (number > 0) {
+        var last = number % 10
+        if (position == 3) {
+            when (last) {
+                1 -> result.add("тысяча")
+                in 2..4 -> result.add("тысячи")
+                else -> result.add("тысяч")
+            }
+        }
+        if (last != 0) {
+            if (position % 3 == 0) {
+                if (number % 100 in 11..19) {
+                    last = number % 100
+                    position++
+                    number /= 10
+                    result.add(rus[3][last - 9])
+                } else if (last in 1..2 && position != 0) {
+                    result.add(rus[3][last - 1])
+                } else result.add(rus[position % 3][last - 1])
+            } else result.add(rus[position % 3][last - 1])
+        }
+        number /= 10
+        position++
+    }
+    return result.reversed().joinToString(separator = " ")
+}
+
