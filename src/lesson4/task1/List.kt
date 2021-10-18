@@ -281,14 +281,18 @@ fun russian(n: Int): String {
     var number = n
 
     while (number > 0) {
-        var last = number % 10
+        var last = number % 100
         if (position == 3) {
-            when (last) {
-                1 -> result.add("тысяча")
-                in 2..4 -> result.add("тысячи")
-                else -> result.add("тысяч")
+            if (last in 10..19) result.add("тысяч")
+            else {
+                when (last % 10) {
+                    1 -> result.add("тысяча")
+                    in 2..4 -> result.add("тысячи")
+                    else -> result.add("тысяч")
+                }
             }
         }
+        last %= 10
         if (last != 0) {
             if (position % 3 == 0) {
                 if (number % 100 in 11..19) {
