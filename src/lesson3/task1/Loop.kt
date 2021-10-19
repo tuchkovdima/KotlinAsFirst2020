@@ -2,7 +2,6 @@
 
 package lesson3.task1
 
-import java.lang.Math.pow
 import kotlin.math.*
 
 
@@ -170,6 +169,7 @@ fun collatzSteps(x: Int): Int = TODO()
  */
 
 
+
 fun lcm(m: Int, n: Int): Int = TODO()
 
 
@@ -215,13 +215,13 @@ fun revert(n: Int): Int {
     var i = 0
     var number = n
 
-    var new_number = 0
+    var newNumber = 0
     while (i < count) {
-        new_number += (number % 10) * 10.0.pow((count - i - 1).toDouble()).toInt()
+        newNumber += (number % 10) * tenpolinome(count - i - 1)
         number /= 10
         i++
     }
-    return new_number
+    return newNumber
 }
 
 
@@ -238,8 +238,8 @@ fun revert(n: Int): Int {
 fun tenpolinome(many: Int): Int {
 
 
-    var ten = 10
-    for (i in 2..many){
+    var ten = 1
+    for (i in 1..many){
         ten *=10
     }
     return ten
@@ -253,7 +253,7 @@ fun isPalindrome(n: Int): Boolean {
     var palindrome = true
     number = n
     while (i < count) {
-        if ((number % 10) != ((number - (number % tenpolinome(count - i))) / tenpolinome(count - i))) {
+        if ((number % 10) != number / tenpolinome(count - i)) {
             palindrome = false
             break
         }
@@ -273,12 +273,8 @@ fun isPalindrome(n: Int): Boolean {
  * Использовать операции со строками в этой задаче запрещается.
  */
 fun hasDifferentDigits(n: Int): Boolean {
-    var count = 0
+    val count = digitNumber(n)
     var number = n
-    do {
-        count++
-        number /= 10
-    } while (number != 0)
 
     var i = 2
     var first = n % 10
@@ -341,7 +337,7 @@ fun squareSequenceDigit(n: Int): Int {
         val count = digitNumber(i * i)
         if (number - count <= 0) {
             val position = count - number + 1
-            return (i * i) % 10.0.pow(position.toDouble()).toInt() / 10.0.pow((position - 1).toDouble()).toInt()
+            return (i * i) % tenpolinome(position) / tenpolinome(position - 1)
         } else {
             number -= count
         }
@@ -369,7 +365,7 @@ fun fibSequenceDigit(n: Int): Int {
         val count = digitNumber(fibNumber)
         if (number - count <= 0) {
             val position = count - number + 1
-            return fibNumber % 10.0.pow(position.toDouble()).toInt() / 10.0.pow((position - 1).toDouble()).toInt()
+            return fibNumber % tenpolinome(position) / tenpolinome(position - 1)
         } else {
             number -= count
         }
