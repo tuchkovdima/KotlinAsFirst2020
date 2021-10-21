@@ -135,9 +135,9 @@ class Tests {
     @Test
     @Tag("3")
     fun lcm() {
+        assertEquals(24, lcm(6, 8))
         assertEquals(13, lcm(13, 13))
         assertEquals(8, lcm(2, 8))
-        assertEquals(24, lcm(6, 8))
         assertEquals(975, lcm(39, 75))
         assertEquals(13384091, lcm(1357, 9863))
         assertEquals(1339310349, lcm(13579, 98631))
@@ -230,6 +230,7 @@ class Tests {
     @Test
     @Tag("4")
     fun squareSequenceDigit() {
+        assertEquals(1, squareSequenceDigit(363301))
         assertEquals(1, squareSequenceDigit(1))
         assertEquals(4, squareSequenceDigit(2))
         assertEquals(5, squareSequenceDigit(7))

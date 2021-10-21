@@ -1,7 +1,6 @@
 @file:Suppress("UNUSED_PARAMETER")
 
 package lesson3.task1
-
 import kotlin.math.*
 
 
@@ -167,10 +166,20 @@ fun collatzSteps(x: Int): Int = TODO()
  * Для заданных чисел m и n найти наименьшее общее кратное, то есть,
  * минимальное число k, которое делится и на m и на n без остатка
  */
+fun nod(m: Int, n: Int): Int {
+    var a = m
+    var b = n
+    if (a < b) {
+        b += a
+        a = b - a
+        b -= a
+    }
+    return if (b > 0) nod(b, a % b) else a
+}
 
-
-
-fun lcm(m: Int, n: Int): Int = TODO()
+fun lcm(m: Int, n: Int): Int {
+    return m / nod(m, n) * n;
+}
 
 
 /**
@@ -237,10 +246,9 @@ fun revert(n: Int): Int {
 
 fun tenpolinome(many: Int): Int {
 
-
     var ten = 1
     for (i in 1..many){
-        ten *=10
+        ten *= 10
     }
     return ten
 }
@@ -326,8 +334,8 @@ fun cos(x: Double, eps: Double): Double = TODO()
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun squareSequenceDigit(n: Int): Int {
 
+fun squareSequenceDigit(n: Int): Int {
 
     var number = n
     var i = 1
@@ -337,7 +345,9 @@ fun squareSequenceDigit(n: Int): Int {
         val count = digitNumber(i * i)
         if (number - count <= 0) {
             val position = count - number + 1
-            return (i * i) % tenpolinome(position) / tenpolinome(position - 1)
+
+            //return (i * i) % tenpolinome(position) / tenpolinome(position - 1)
+            return (i * i) % 10.0.pow(position.toDouble()).toInt() / 10.0.pow((position - 1).toDouble()).toInt()
         } else {
             number -= count
         }
