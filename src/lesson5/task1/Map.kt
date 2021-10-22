@@ -14,10 +14,7 @@ package lesson5.task1
  * на основе цен из `costs`. В случае неизвестной цены считать, что товар
  * игнорируется.
  */
-fun shoppingListCost(
-    shoppingList: List<String>,
-    costs: Map<String, Double>
-): Double {
+fun shoppingListCost(shoppingList: List<String>, costs: Map<String, Double>): Double {
     var totalCost = 0.0
 
     for (item in shoppingList) {
@@ -36,10 +33,8 @@ fun shoppingListCost(
  * Для набора "имя"-"номер телефона" `phoneBook` оставить только такие пары,
  * для которых телефон начинается с заданного кода страны `countryCode`
  */
-fun filterByCountryCode(
-    phoneBook: MutableMap<String, String>,
-    countryCode: String
-) {
+fun filterByCountryCode(phoneBook: MutableMap<String, String>, countryCode: String) {
+
     val namesToRemove = mutableListOf<String>()
 
     for ((name, phone) in phoneBook) {
@@ -96,7 +91,15 @@ fun buildWordSet(text: List<String>): MutableSet<String> {
  *   buildGrades(mapOf("Марат" to 3, "Семён" to 5, "Михаил" to 5))
  *     -> mapOf(5 to listOf("Семён", "Михаил"), 3 to listOf("Марат"))
  */
-fun buildGrades(grades: Map<String, Int>): Map<Int, List<String>> = TODO()
+
+
+fun buildGrades(grades: Map<String, Int>): Map<Int, List<String>> {
+
+    val markStudent = mutableMapOf<Int, List<String>>()
+    for ((name, grade) in grades) markStudent[grade] =
+        markStudent.getOrPut(grade) { emptyList() } + name
+    return markStudent
+}
 
 /**
  * Простая (2 балла)
@@ -109,6 +112,7 @@ fun buildGrades(grades: Map<String, Int>): Map<Int, List<String>> = TODO()
  *   containsIn(mapOf("a" to "z"), mapOf("a" to "zee", "b" to "sweet")) -> false
  */
 fun containsIn(a: Map<String, String>, b: Map<String, String>): Boolean = TODO()
+
 
 /**
  * Простая (2 балла)
@@ -125,7 +129,12 @@ fun containsIn(a: Map<String, String>, b: Map<String, String>): Boolean = TODO()
  *     -> a changes to mutableMapOf() aka becomes empty
  */
 fun subtractOf(a: MutableMap<String, String>, b: Map<String, String>) {
-    TODO()
+
+    for ((key) in b) {
+        if (a[key] == b[key]) {
+            a.remove(key)
+        }
+    }
 }
 
 /**
