@@ -97,7 +97,7 @@ fun buildGrades(grades: Map<String, Int>): Map<Int, List<String>> {
 
     val markStudent = mutableMapOf<Int, List<String>>()
     for ((name, grade) in grades) markStudent[grade] =
-        markStudent.getOrPut(grade) { emptyList() } + name
+        (markStudent.getOrDefault(grade, emptyList()) + name)
     return markStudent
 }
 
@@ -130,8 +130,8 @@ fun containsIn(a: Map<String, String>, b: Map<String, String>): Boolean = TODO()
  */
 fun subtractOf(a: MutableMap<String, String>, b: Map<String, String>) {
 
-    for ((key) in b) {
-        if (a[key] == b[key]) {
+    for ((key, value) in b) {
+        if (a[key] == value) {
             a.remove(key)
         }
     }
