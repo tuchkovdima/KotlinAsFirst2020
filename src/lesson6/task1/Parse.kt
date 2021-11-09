@@ -110,7 +110,7 @@ fun dateStrToDigit(str: String): String {
     if (parts[0].toInt() > day) {
         return itogStr
     } else {
-        if (parts[0].toInt() < 10) parts[0] = "0" + parts[0]
+        if (parts[0].toInt() < 10 && parts[0][0] != '0') parts[0] = "0" + parts[0]
         if (parts[1].toInt() < 10) parts[1] = "0" + parts[1]
         itogStr = parts[0] + "." + parts[1] + "." + parts[2]
 
