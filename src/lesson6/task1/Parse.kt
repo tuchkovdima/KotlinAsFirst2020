@@ -2,6 +2,10 @@
 
 package lesson6.task1
 
+import kotlinx.html.ARel.next
+import java.lang.NumberFormatException
+import java.util.EnumSet.range
+
 // Урок 6: разбор строк, исключения
 // Максимальное количество баллов = 13
 // Рекомендуемое количество баллов = 11
@@ -74,7 +78,45 @@ fun main() {
  * Обратите внимание: некорректная с точки зрения календаря дата (например, 30.02.2009) считается неверными
  * входными данными.
  */
-fun dateStrToDigit(str: String): String = TODO()
+fun daysInMonth(month: Int, year: Int): Int =
+    when (month) {
+        4, 6, 9, 11 -> 30
+        2 -> {
+
+            if (year % 400.0 == 0.0) 29
+            else if ((year % 4.0 == 0.0) && (year % 100.0 != 0.0)) 29
+            else 28
+        }
+        else -> 31
+    }
+
+val months = listOf(
+    "января", "февраля", "марта", "апреля",
+    "мая", "июня", "июля", "августа", "сентября", "октября", "ноября", "декабря"
+)
+
+fun dateStrToDigit(str: String): String {
+    val parts = str.split(" ").toMutableList()
+    if (parts.size != 3) return ""
+    var itogStr = ""
+    for (i in 0..11) {
+        if (parts[1] == months[i]) {
+            parts[1] = (i + 1).toString()
+            break
+        } else if (i == 11) return itogStr
+    }
+
+    val day = daysInMonth(parts[1].toInt(), parts[2].toInt())
+    if (parts[0].toInt() > day) {
+        return itogStr
+    } else {
+        if (parts[0].toInt() < 10) parts[0] = "0" + parts[0]
+        if (parts[1].toInt() < 10) parts[1] = "0" + parts[1]
+        itogStr = parts[0] + "." + parts[1] + "." + parts[2]
+
+    }
+    return itogStr
+}
 
 /**
  * Средняя (4 балла)
@@ -86,7 +128,30 @@ fun dateStrToDigit(str: String): String = TODO()
  * Обратите внимание: некорректная с точки зрения календаря дата (например, 30 февраля 2009) считается неверными
  * входными данными.
  */
-fun dateDigitToStr(digital: String): String = TODO()
+
+fun dateDigitToStr(digital: String): String {
+    val parts = digital.split(".").toMutableList()
+    if (parts.size != 3) return ""
+    var itogStr = ""
+    try {
+        val day = daysInMonth(parts[1].toInt(), parts[2].toInt())
+        for (i in 0..11) {
+            if ((parts[1].toInt()) == (i + 1)) {
+                parts[1] = months[i]
+                break
+            } else if (i == 11) return itogStr
+        }
+        if (parts[0].toInt() > day) {
+            return itogStr
+        } else {
+            if (parts[0].toInt() < 10) parts[0] = parts[0].toInt().toString()
+            itogStr = parts[0] + " " + parts[1] + " " + parts[2]
+        }
+    } catch (e: NumberFormatException) {
+        return ""
+    }
+    return itogStr
+}
 
 /**
  * Средняя (4 балла)
@@ -116,6 +181,7 @@ fun flattenPhoneNumber(phone: String): String = TODO()
  */
 fun bestLongJump(jumps: String): Int = TODO()
 
+
 /**
  * Сложная (6 баллов)
  *
@@ -141,7 +207,7 @@ fun bestHighJump(jumps: String): Int = TODO()
 fun plusMinus(expression: String): Int = TODO()
 
 /**
- * Сложная (6 баллов)
+ * Сложная (6 баллов)a
  *
  * Строка состоит из набора слов, отделённых друг от друга одним пробелом.
  * Определить, имеются ли в строке повторяющиеся слова, идущие друг за другом.

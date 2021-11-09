@@ -35,12 +35,14 @@ class Tests {
     @Tag("4")
     fun dateStrToDigit() {
         assertEquals("15.07.2016", dateStrToDigit("15 июля 2016"))
-        assertEquals("", dateStrToDigit("3 мартобря 1918"))
+
         assertEquals("18.11.2018", dateStrToDigit("18 ноября 2018"))
-        assertEquals("", dateStrToDigit("23"))
+
         assertEquals("03.04.2011", dateStrToDigit("3 апреля 2011"))
         assertEquals("", dateStrToDigit("32 сентября 2011"))
         assertEquals("", dateStrToDigit("29 февраля 1993"))
+        assertEquals("", dateStrToDigit("3 мартобря 1918"))
+        assertEquals("", dateStrToDigit("23"))
     }
 
     @Test
@@ -72,9 +74,9 @@ class Tests {
     @Tag("5")
     fun bestLongJump() {
         assertEquals(717, bestLongJump("706 % - 717 - 703"))
-        assertEquals(-1, bestLongJump("% - - % -"))
-        assertEquals(754, bestLongJump("700 717 707 % 754"))
+     assertEquals(754, bestLongJump("700 717 707 % 754"))
         assertEquals(-1, bestLongJump("700 + 700"))
+        assertEquals(-1, bestLongJump("% - - % -"))
 
     }
 
