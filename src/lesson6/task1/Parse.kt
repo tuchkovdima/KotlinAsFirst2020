@@ -2,14 +2,8 @@
 
 package lesson6.task1
 
-import kotlinx.html.ARel.next
+import lesson2.task2.daysInMonth
 import java.lang.NumberFormatException
-import java.util.EnumSet.range
-
-// Урок 6: разбор строк, исключения
-// Максимальное количество баллов = 13
-// Рекомендуемое количество баллов = 11
-// Вместе с предыдущими уроками (пять лучших, 2-6) = 40/54
 
 /**
  * Пример
@@ -78,17 +72,6 @@ fun main() {
  * Обратите внимание: некорректная с точки зрения календаря дата (например, 30.02.2009) считается неверными
  * входными данными.
  */
-fun daysInMonth(month: Int, year: Int): Int =
-    when (month) {
-        4, 6, 9, 11 -> 30
-        2 -> {
-
-            if (year % 400.0 == 0.0) 29
-            else if ((year % 4.0 == 0.0) && (year % 100.0 != 0.0)) 29
-            else 28
-        }
-        else -> 31
-    }
 
 val months = listOf(
     "января", "февраля", "марта", "апреля",
@@ -98,24 +81,19 @@ val months = listOf(
 fun dateStrToDigit(str: String): String {
     val parts = str.split(" ").toMutableList()
     if (parts.size != 3) return ""
-    var itogStr = ""
-    for (i in 0..11) {
-        if (parts[1] == months[i]) {
-            parts[1] = (i + 1).toString()
-            break
-        } else if (i == 11) return itogStr
+    val day = parts[0].toIntOrNull()
+    val year = parts[2].toIntOrNull()
+    parts[1] = (months.indexOf(parts[1]) + 1).toString()
+    val month = parts[1].toInt()
+    if (month == 0) return ""
+    if (year == null) return ""
+    val maxDay = daysInMonth(month, year)
+    return if (day == null || (day > maxDay) || day < 1) ""
+    else {
+        if (day < 10 && parts[0][0] != '0') parts[0] = "0" + parts[0]
+        if (month < 10) parts[1] = "0" + parts[1]
+        parts[0] + "." + parts[1] + "." + parts[2]
     }
-
-    val day = daysInMonth(parts[1].toInt(), parts[2].toInt())
-    if (parts[0].toInt() > day) {
-        return itogStr
-    } else {
-        if (parts[0].toInt() < 10 && parts[0][0] != '0') parts[0] = "0" + parts[0]
-        if (parts[1].toInt() < 10) parts[1] = "0" + parts[1]
-        itogStr = parts[0] + "." + parts[1] + "." + parts[2]
-
-    }
-    return itogStr
 }
 
 /**
@@ -132,27 +110,22 @@ fun dateStrToDigit(str: String): String {
 fun dateDigitToStr(digital: String): String {
     val parts = digital.split(".").toMutableList()
     if (parts.size != 3) return ""
-    var itogStr = ""
-    try {
-        val day = daysInMonth(parts[1].toInt(), parts[2].toInt())
-        for (i in 0..11) {
-            if ((parts[1].toInt()) == (i + 1)) {
-                parts[1] = months[i]
-                break
-            } else if (i == 11) return itogStr
-        }
-        if (parts[0].toInt() > day) {
-            return itogStr
-        } else {
-            if (parts[0].toInt() < 10) parts[0] = parts[0].toInt().toString()
-            itogStr = parts[0] + " " + parts[1] + " " + parts[2]
-        }
-    } catch (e: NumberFormatException) {
-        return ""
+    val day = parts[0].toIntOrNull()
+    val year = parts[2].toIntOrNull()
+    val month = parts[1].toIntOrNull()
+    if (day == null) return ""
+    if (year == null) return ""
+    if (month == null) return ""
+    val maxDay = daysInMonth(month, year)
+    if ((month < 1) || (month > 12)) return ""
+    parts[1] = months[month - 1]
+    return if ((day > maxDay) || (day < 1)) {
+        ""
+    } else {
+        if (day < 10) parts[0] = day.toString()
+        parts[0] + " " + parts[1] + " " + parts[2]
     }
-    return itogStr
 }
-
 /**
  * Средняя (4 балла)
  *

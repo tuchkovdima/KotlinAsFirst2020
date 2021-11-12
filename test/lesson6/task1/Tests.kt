@@ -34,12 +34,18 @@ class Tests {
     @Test
     @Tag("4")
     fun dateStrToDigit() {
+
+        assertEquals("", dateStrToDigit("0 января 1"))
+        assertEquals("", dateStrToDigit("00 января 1"))
+        assertEquals("", dateStrToDigit("нулевое января 1"))
+        assertEquals("", dateStrToDigit("нулевое января первого"))
+
+
+        assertEquals("", dateStrToDigit(" июля 21"))
+
         assertEquals("01.01.1", dateStrToDigit("01 января 1"))
-
         assertEquals("15.07.2016", dateStrToDigit("15 июля 2016"))
-
         assertEquals("18.11.2018", dateStrToDigit("18 ноября 2018"))
-
         assertEquals("03.04.2011", dateStrToDigit("3 апреля 2011"))
         assertEquals("", dateStrToDigit("32 сентября 2011"))
         assertEquals("", dateStrToDigit("29 февраля 1993"))
@@ -53,7 +59,9 @@ class Tests {
 
         assertEquals("15 июля 2016", dateDigitToStr("15.07.2016"))
         assertEquals("", dateDigitToStr("01.02.20.19"))
+
         assertEquals("", dateDigitToStr("28.00.2000"))
+
         assertEquals("3 апреля 2011", dateDigitToStr("03.04.2011"))
         assertEquals("", dateDigitToStr("ab.cd.ef"))
         assertEquals("", dateDigitToStr("32.09.2011"))
