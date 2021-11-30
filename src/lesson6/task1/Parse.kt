@@ -83,19 +83,14 @@ fun dateStrToDigit(str: String): String {
     if (parts.size != 3) return ""
     val day = parts[0].toIntOrNull()
     val year = parts[2].toIntOrNull()
-    parts[1] = (months.indexOf(parts[1]) + 1).toString()
-    val month = parts[1].toInt()
-    if (month == 0) return ""
-    if (year == null) return ""
+    val month = months.indexOf(parts[1]) + 1
+    if ((month == 0) || (year == null) || (year < 0)) return ""
     val maxDay = daysInMonth(month, year)
     return if (day == null || (day > maxDay) || day < 1) ""
     else {
-        if (day < 10 && parts[0][0] != '0') parts[0] = "0" + parts[0]
-        if (month < 10) parts[1] = "0" + parts[1]
-        parts[0] + "." + parts[1] + "." + parts[2]
+        String.format("%02d.%02d.%d", day, month, year)
     }
 }
-
 /**
  * Средняя (4 балла)
  *
@@ -113,17 +108,13 @@ fun dateDigitToStr(digital: String): String {
     val day = parts[0].toIntOrNull()
     val year = parts[2].toIntOrNull()
     val month = parts[1].toIntOrNull()
-    if (day == null) return ""
-    if (year == null) return ""
-    if (month == null) return ""
+    if ((day == null) || (year == null) || (month == null)) return ""
     val maxDay = daysInMonth(month, year)
     if ((month < 1) || (month > 12)) return ""
-    parts[1] = months[month - 1]
     return if ((day > maxDay) || (day < 1)) {
         ""
     } else {
-        if (day < 10) parts[0] = day.toString()
-        parts[0] + " " + parts[1] + " " + parts[2]
+        String.format("%d %s %d", day, months[month - 1], year)
     }
 }
 /**
@@ -141,7 +132,6 @@ fun dateDigitToStr(digital: String): String {
  * PS: Дополнительные примеры работы функции можно посмотреть в соответствующих тестах.
  */
 fun flattenPhoneNumber(phone: String): String = TODO()
-
 /**
  * Средняя (5 баллов)
  *
@@ -253,3 +243,41 @@ fun fromRoman(roman: String): Int = TODO()
  *
  */
 fun computeDeviceCells(cells: Int, commands: String, limit: Int): List<Int> = TODO()
+
+
+
+
+
+
+fun myFun(phones: Set<String>, prefix: String): Set<String> {
+    val result = mutableSetOf<String>() // Создаем массив куда будем записывать подходящие имена
+    for (entry in phones) {
+        val matches = entry.split(" ") // Делим строку по пробелу и проверяем
+        if (matches.size != 2) // что у нас только 2 слова
+            throw IllegalArgumentException("Wrong format: $entry") // если это не так, то бросаем ошибку
+        val phone = matches[0]
+        val name = matches[1]
+        if (phone.toIntOrNull() == null) {    // Конвертируем телефон в Int, чтобы проверить, что он состоит только из чисел.
+            throw IllegalArgumentException("Wrong number format: $phone")    // Если это не так, бросаем ошибку.
+        }
+        if (phone.startsWith(prefix)) {// проверяем если номер начинается с нужного нам префикса.
+            result.add(name)// Если так - пишем имя в массив с результатами
+        }
+    }
+    return result // возвращает фамилии соответствующие префиксу
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
