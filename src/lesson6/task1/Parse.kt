@@ -110,8 +110,7 @@ fun dateDigitToStr(digital: String): String {
     val month = parts[1].toIntOrNull()
     if ((day == null) || (year == null) || (month == null)) return ""
     val maxDay = daysInMonth(month, year)
-    if ((month < 1) || (month > 12)) return ""
-    return if ((day > maxDay) || (day < 1)) {
+    return if ((day > maxDay) || (day < 1)|| (month < 1) || (month > 12)) {
         ""
     } else {
         String.format("%d %s %d", day, months[month - 1], year)
@@ -243,41 +242,4 @@ fun fromRoman(roman: String): Int = TODO()
  *
  */
 fun computeDeviceCells(cells: Int, commands: String, limit: Int): List<Int> = TODO()
-
-
-
-
-
-
-fun myFun(phones: Set<String>, prefix: String): Set<String> {
-    val result = mutableSetOf<String>() // Создаем массив куда будем записывать подходящие имена
-    for (entry in phones) {
-        val matches = entry.split(" ") // Делим строку по пробелу и проверяем
-        if (matches.size != 2) // что у нас только 2 слова
-            throw IllegalArgumentException("Wrong format: $entry") // если это не так, то бросаем ошибку
-        val phone = matches[0]
-        val name = matches[1]
-        if (phone.toIntOrNull() == null) {    // Конвертируем телефон в Int, чтобы проверить, что он состоит только из чисел.
-            throw IllegalArgumentException("Wrong number format: $phone")    // Если это не так, бросаем ошибку.
-        }
-        if (phone.startsWith(prefix)) {// проверяем если номер начинается с нужного нам префикса.
-            result.add(name)// Если так - пишем имя в массив с результатами
-        }
-    }
-    return result // возвращает фамилии соответствующие префиксу
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

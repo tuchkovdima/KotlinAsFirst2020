@@ -164,19 +164,6 @@ class Tests {
         assertThrows(IllegalArgumentException::class.java) { computeDeviceCells(10, "+>+>[+>", 3) }
         assertThrows(IllegalStateException::class.java) { computeDeviceCells(20, ">>>>>>>>>>>>>", 12) }
     }
-
-
-    @Test
-    fun myFun() {
-        assertEquals(setOf("Иванов", "Петров"),myFun(setOf("4628091 Иванов", "4631794 Петров", "6409045 Волкова", "7081356 Кошкина"), "46")) // тест из примера
-        assertEquals(setOf("Ваня", "Петя"), myFun(setOf("12345 Ваня", "7674 Петя"), ""))
-        assertEquals(setOf("Ваня", "Петя"), myFun(setOf("12345 Ваня", "12347 Ваня", "7674 Петя"), ""))
-        assertEquals(setOf<String>(), myFun(setOf("12345 Ваня", "7574 Петя"), "76"))
-        assertThrows(IllegalArgumentException::class.java) {
-            myFun(setOf("1234 Катя", "0x16 Михаил"), "12")
-        }
-        assertThrows(IllegalArgumentException::class.java) {
-            myFun(setOf("1234 Катя", "016 Михаил Круг"), "12")
-        }
-    }
 }
+
+
