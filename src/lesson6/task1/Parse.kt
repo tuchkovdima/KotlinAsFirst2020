@@ -172,7 +172,7 @@ fun plusMinus(expression: String): Int {
     var sum = 0
     val number = mutableListOf<Int>()
 
-    if (expression[0].toString().toUIntOrNull() == null) {
+    if ((parts[0].toUIntOrNull() == null) || (expression[0].toString().toUIntOrNull() == null)) {
         throw IllegalArgumentException()
     }
     for ((i, e) in parts.withIndex()) {
