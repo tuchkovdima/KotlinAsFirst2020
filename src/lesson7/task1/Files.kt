@@ -74,19 +74,6 @@ fun deleteMarked(inputName: String, outputName: String) {
         }
     }
 }
-  /**
-    val writer = File(outputName).bufferedWriter()
-    for (line in File(inputName).readLines()) {
-        if (line.isEmpty()) writer.newLine()
-        else if (line[0] != '_') {
-            writer.write(line)
-            writer.newLine()
-        }
-    }
-    writer.close()
-}
-**/
-
 
 /**
  * Средняя (14 баллов)
@@ -135,30 +122,23 @@ fun sibilants(inputName: String, outputName: String) {
  *
  */
 fun centerFile(inputName: String, outputName: String) {
-    val file = mutableListOf<String>()
+    val texList = mutableListOf<String>()
     var stringMax = 0
     for (line in File(inputName).readLines()) {
         val newLine = line.trim()
-      /*  if (!line.isEmpty()) {
-            if (line[0] == ' ') {
-                newLine.replaceFirst(" ", "")
-            }
-            if (line[line.lastIndex] == ' ') {
-                newLine.replaceAfterLast(" ", "")
-            }
-        }*/
-        file.add(newLine)
+        texList.add(newLine)
         stringMax = max(stringMax, newLine.length)
     }
     File(outputName).bufferedWriter().use {
-        for (line in file) {
+        for (line in texList) {
             var count = stringMax + line.length
             if ((count % 2) == 1) {
                 count = (count - 1) / 2
             } else {
                 count /= 2
             }
-            it.write(String.format("%${count}s", line) + "\n")
+            it.write(String.format("%${count}s", line))
+            it.newLine()
         }
     }
 }
