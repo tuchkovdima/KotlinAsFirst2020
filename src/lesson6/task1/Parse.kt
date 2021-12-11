@@ -102,6 +102,8 @@ fun dateStrToDigit(str: String): String {
  * входными данными.
  */
 
+
+
 fun dateDigitToStr(digital: String): String {
     val parts = digital.split(".").toMutableList()
     if (parts.size != 3) return ""
@@ -172,18 +174,14 @@ fun plusMinus(expression: String): Int {
     var sum = 0
     val number = mutableListOf<Int>()
 
-    if ((parts[0].toUIntOrNull() == null) || (expression[0].toString().toUIntOrNull() == null)) {
+    if ((expression[0].toString().toUIntOrNull() == null) || (parts.size % 2 == 0)) {
         throw IllegalArgumentException()
     }
     for ((i, e) in parts.withIndex()) {
         if (e.toIntOrNull() != null && i % 2 == 0) {
             if (e.toInt() < 0) throw IllegalArgumentException()
             if (i == 0) {
-                try {
-                    number.add(e.toInt())
-                } catch (e: IllegalArgumentException) {
-                    throw IllegalArgumentException()
-                }
+                number.add(e.toInt())
             } else number[i - (i / 2)] *= e.toInt()
         }
         else if (i % 2 == 1) {
@@ -196,6 +194,7 @@ fun plusMinus(expression: String): Int {
                 throw IllegalArgumentException()
             }
         }
+        else throw IllegalArgumentException()
     }
     for (i in number) sum += i
     return sum
