@@ -4,6 +4,7 @@ package lesson7.task1
 
 import java.io.File
 import java.lang.Integer.max
+import java.util.*
 
 // Урок 7: работа с файлами
 // Урок интегральный, поэтому его задачи имеют сильно увеличенную стоимость
@@ -101,8 +102,23 @@ fun countSubstrings(inputName: String, substrings: List<String>): Map<String, In
  *
  */
 fun sibilants(inputName: String, outputName: String) {
-    TODO()
+    val soglList = listOf('Ж', 'Ч', 'Ш', 'Щ', 'ж', 'ч', 'ш', 'щ')
+    val glasMap = mapOf('Ы' to "И", 'Я' to "А", 'Ю' to "У", 'ы' to "и", 'я' to "а", 'ю' to "у")
+    File(outputName).bufferedWriter().use {
+        for (line in File(inputName).readLines()) {
+            it.write(line[0].toString())
+            for (i in 1 until line.length) {
+                if ((line[i - 1] in soglList) && (line[i] in glasMap)) {
+                    it.write(glasMap.getOrDefault(line[i], glasMap.getOrDefault(line[i], "")))
+                } else {
+                    it.write(line[i].toString())
+                }
+            }
+            it.newLine()
+        }
+    }
 }
+
 
 /**
  * Средняя (15 баллов)
