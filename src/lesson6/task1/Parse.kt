@@ -178,7 +178,7 @@ fun plusMinus(expression: String): Int {
         throw IllegalArgumentException()
     }
     for ((i, e) in parts.withIndex()) {
-        if (e.toIntOrNull() != null && i % 2 == 0) {
+        if (e.toUIntOrNull() != null && i % 2 == 0) {
             if (e.toInt() < 0) throw IllegalArgumentException()
             if (i == 0) {
                 number.add(e.toInt())

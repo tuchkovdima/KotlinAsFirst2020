@@ -102,14 +102,14 @@ fun countSubstrings(inputName: String, substrings: List<String>): Map<String, In
  *
  */
 fun sibilants(inputName: String, outputName: String) {
-    val soglList = listOf('Ж', 'Ч', 'Ш', 'Щ', 'ж', 'ч', 'ш', 'щ')
-    val glasMap = mapOf('Ы' to "И", 'Я' to "А", 'Ю' to "У", 'ы' to "и", 'я' to "а", 'ю' to "у")
+    val consList = listOf('Ж', 'Ч', 'Ш', 'Щ', 'ж', 'ч', 'ш', 'щ')
+    val vowMap = mapOf('Ы' to "И", 'Я' to "А", 'Ю' to "У", 'ы' to "и", 'я' to "а", 'ю' to "у")
     File(outputName).bufferedWriter().use {
         for (line in File(inputName).readLines()) {
             it.write(line[0].toString())
             for (i in 1 until line.length) {
-                if ((line[i - 1] in soglList) && (line[i] in glasMap)) {
-                    it.write(glasMap.getOrDefault(line[i], glasMap.getOrDefault(line[i], "")))
+                if ((line[i - 1] in consList) && (line[i] in vowMap)) {
+                    it.write(vowMap.getOrDefault(line[i], ""))
                 } else {
                     it.write(line[i].toString())
                 }
