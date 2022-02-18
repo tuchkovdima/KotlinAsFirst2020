@@ -1,5 +1,5 @@
 
-Дмитрий@DESKTOP-81DJDNP MINGW64 ~
+```Дмитрий@DESKTOP-81DJDNP MINGW64 ~
 $ cd D:\уник\KotlinAsFirst2020
 bash: cd: D:уникKotlinAsFirst2020: No such file or directory
 
@@ -1037,3 +1037,4 @@ branch 'backport' set up to track 'origin/backport'.
 
 Дмитрий@DESKTOP-81DJDNP MINGW64 /d/уник/KotlinAsFirst2020 (backport)
 $
+```
